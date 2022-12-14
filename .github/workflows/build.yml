@@ -45,11 +45,10 @@ jobs:
       - name: Set tag
         id: set-tag
         run: |
-          if [[ ${{ matrix.version }} =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)(RC[1-9]+)?$ ]]; then
+          if [[ ${{ matrix.version }} =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
             MAJOR=${BASH_REMATCH[1]}
             MINOR=${BASH_REMATCH[2]}
             PATCH=${BASH_REMATCH[3]}
-            RC=${BASH_REMATCH[4]}
           else
             exit 1
           fi
@@ -63,8 +62,8 @@ jobs:
             ;;
           esac
 
-          TAG="${MAJOR}.${MINOR}${RC}-${{ matrix.mode }}${ENV_MARK}"
-          TAG_GRAPHIC="${MAJOR}.${MINOR}${RC}-graphic-${{ matrix.mode }}${ENV_MARK}"
+          TAG="${MAJOR}.${MINOR}-${{ matrix.mode }}${ENV_MARK}"
+          TAG_GRAPHIC="${MAJOR}.${MINOR}-graphic-${{ matrix.mode }}${ENV_MARK}"
           
           mkdir tag
           touch "tag/${TAG}"
@@ -167,8 +166,9 @@ jobs:
             $(find graphic_tags -type f -print0 | while read -rd $'\0' file; do echo ${file##*/}; done | sort -r)
           )
 
-          LATEST_TAG="${TAGS[0]}"
-          LATEST_GRAPHIC_TAG="${GRAPHIC_TAGS[0]}"
+          LATEST_VERSION=$(echo "$LATEST_VERSION" | sed -E 's/\.[0-9]+$//')
+          LATEST_TAG="${TAGS[0]/-dev/}"
+          LATEST_GRAPHIC_TAG="${GRAPHIC_TAGS[0]/-dev/}"
 
           function generate_tags_table () {
             TAGS=("$@")
