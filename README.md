@@ -10,9 +10,9 @@
 arch: linux/amd64, linux/arm64
 
 ```
-docker pull hyqo/php-alpine:8.1-fpm
-docker pull hyqo/php-alpine:8.1-cli
-docker pull hyqo/php-alpine:8.1-zts
+docker pull hyqo/php-alpine:8.2.0-fpm
+docker pull hyqo/php-alpine:8.2.0-cli
+docker pull hyqo/php-alpine:8.2.0-zts
 ```
 
 |                                   | prod    | dev     |
