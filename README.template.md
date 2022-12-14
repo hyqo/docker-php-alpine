@@ -10,9 +10,9 @@
 arch: linux/amd64, linux/arm64
 
 ```
-docker pull %%IMAGE%%:8.1-fpm
-docker pull %%IMAGE%%:8.1-cli
-docker pull %%IMAGE%%:8.1-zts
+docker pull %%IMAGE%%:%%LATEST_VERSION%%-fpm
+docker pull %%IMAGE%%:%%LATEST_VERSION%%-cli
+docker pull %%IMAGE%%:%%LATEST_VERSION%%-zts
 ```
 
 |                                   | prod    | dev     |

@@ -157,6 +157,7 @@ jobs:
 
           for VERSION in ${{ join(fromJSON(needs.build-matrix.outputs.version), ' ') }}; do
             VERSION_BADGES="![](https://img.shields.io/badge/-${VERSION}-informational) "$VERSION_BADGES
+            LATEST_VERSION="${VERSION}"
           done
           
           TAGS=(
@@ -200,6 +201,7 @@ jobs:
           README=$(<README.template.md)
           README="${README//%%IMAGE%%/$IMAGE}"
           README="${README//%%VERSION_BADGES%%/$VERSION_BADGES}"
+          README="${README//%%LATEST_VERSION%%/$LATEST_VERSION}"
           README="${README//%%LATEST_TAG%%/$LATEST_TAG}"
           README="${README//%%LATEST_GRAPHIC_TAG%%/$LATEST_GRAPHIC_TAG}"
 
